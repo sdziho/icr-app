@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import {NameForm} from './Home'
+import { NameForm } from '../Forms/NameForm';
 
 const Wrap= styled.div`
     margin: 2rem auto;

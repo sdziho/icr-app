@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import {Route, BrowserRouter as Router} from "react-router-dom"
+import { NameForm } from '../Forms/NameForm';
+import { DataPckr } from '../Forms/DataPicker';
+import Button from '@material-ui/core/Button';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { OdabirAuta, OdabirVrata } from '../Forms/Odabir';
+import { Checkedbox } from '../Forms/Checked';
+import { Auto } from './Auto';
 
 const Nav= styled.ul`
     * {
@@ -11,215 +18,139 @@ const Nav= styled.ul`
     margin: 2rem auto;
     display: grid;
     grid-template-columns: 1fr 3fr;
-    
       .lijevo {
-        padding: 1em;
-        border: 1px solid black;
+        padding: 2em;
         text-align:left;
         background: #dbe9e5;
-        right-border: 0px;
         border-radius: 5px;
+        border-right: 1px solid #3f4c52;
+        box-shadow: 2px 2px 5px 2px #4f5152;
+        .tekst{
+          padding-top:1em;
+        }
+        .filtriraj{
+          text-align:center;
+          padding-top:1em;
+        }
+        .box{
+          max-width: 10rem;
+          padding-top: 1em;
+          display:grid;
+          grid-template-columns: 0.3fr 1fr;
+          
+        }
       }
       
       .desno {
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px 2px #4f5152;
         padding: 15px;
-        border: 1px solid black;
         background: #dbe9e5;
         display: grid;
         grid-gap: 1em;
-        .auto{
-          display: grid;
-          grid-template-columns: 1fr 2fr 1fr;
-          border: 1px solid black;
-          border-radius: 5px;
-          text-decoration: none;
-          &:hover{
-            background: #eefdf9;
-            border-bottom: 2px solid black;
-          }
-          
-          img { 
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            float:left;
-            border-right: 1px solid black; 
-            
-          }
-          .detalji{
-            display: inline-block;
-            border-right: 1px solid black;
-            text-align:left;
-          }
-          .cijena{
-            display: inline-block;
-            text-align:center;
-          }
-        }
+        
   
       }
 `
 
 
-const Na= styled.ul`
-    padding: 1em;
-    background: #dbe9e5;;
-    dislay: flex;
-    color: white;
-    text-align: left;
-    font-size: 9px;
-    margin: 0;
-    .Li{
-        display: inline-block;
-        font-size: 14px;
-        padding: 1em;
-        .tab{
-            color: black;
-            text-decoration:none;
-            &:hover{
-                color: #838688;
-              }
-        }
-        
-      }
-    
-`
+  
 
-export class NameForm extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {value: ''};
-  
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-  
-    handleChange(event) {
-      event.preventDefault();
-      this.setState({value: event.target.value});
-    }
-    
-    handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.value);
-      event.preventDefault();
-    }
-  
-    render() {
-      return (
-        <form>
-        <label>
-          <input type="text" value={this.state.value} onChange={this.handleChange} onSubmit={this.handleSubmit}/>
-        </label>
-        
-      </form>
-      );
-    }
+export class Home extends Component {
+  state = { 
+    CijenaPocetna: 0,
+    CijenaKrajnja: 99999,
+    DatumPocetni: new Date(),
+    DatumKrajnji: new Date(),
+    auto: '',
+    BrojVrata: 0,
+    BrojSjedista: 0,
+    klima: false,
+    senzor: false,
+    karton: false,
+    automatik: false
   }
-
-  class OdabirAuta extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {value: 'audi'};
-  
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-  
-    handleChange(event) {
-      this.setState({value: event.target.value});
-    }
-  
-    handleSubmit(event) {
-      alert('Your favorite flavor is: ' + this.state.value);
-      event.preventDefault();
-    }
-  
-    render() {
-      return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <select value={this.state.value} onChange={this.handleChange}>
-              <option value="audi">Audi</option>
-              <option value="volkswagen">Volkswagen</option>
-              <option value="bmw">BMW</option>
-              <option value="mercedes">Mercedes</option>
-            </select>
-          </label>
-        </form>
-      );
-    }
+  callbackPocetna = (childData) => {
+    this.setState({CijenaPocetna: childData})
   }
-
-
-  export class Checkedbox extends React.Component{
-    constructor(){
-      super();
-      this.state = { checked: false }
-    }
-    handleCheck = () => {
-        this.setState({checked: !this.state.checked })
-    }
-    render(){
-        return (
-               <div>
-                   <input type="checkbox"  id="mybox" onChange={this.handleCheck}
-                          defaultChecked={this.state.checked}/>
-               </div>
-        )
-    };
-}
-
-export const Home = () => {
+  callbackKrajnja = (childData) => {
+    this.setState({CijenaKrajnja: childData})
+  }
+  callbackDatumPoc = (childData) => {
+    this.setState({DatumPocetni: childData})
+  }
+  callbackDatumKraj = (childData) => {
+    this.setState({DatumKrajnji: childData})
+  }
+  callbackAuto = (childData) => {
+    this.setState({auto: childData})
+  }
+  callbackVrata = (childData) => {
+    this.setState({BrojVrata: childData})
+  }
+  callbackSjedista = (childData) => {
+    this.setState({BrojSjedista: childData})
+  }
+  callbackKlima = (childData) => {
+    this.setState({klima: childData})
+  }
+  callbackKarton = (childData) => {
+    this.setState({karton: childData})
+  }
+  callbackSenzor = (childData) => {
+    this.setState({senzor: childData})
+  }
+  callbackAutomatik = (childData) => {
+    this.setState({automatik: childData})
+  }
+  handleClick=()=>{
+    console.log(this.state)
+  }
+  render(){
     return (
     <Nav>
         <div class="lijevo">
-            <p>Unesite cijenu:</p>
-                od: <NameForm></NameForm>
-                do: <NameForm></NameForm>
-            <p>Unesite datum:</p>
-                od: <NameForm></NameForm>
-                do: <NameForm></NameForm> 
-            <p>Odaberite marku auta:</p>
-                <OdabirAuta></OdabirAuta>
-            <p>Odaberite broj vrata:</p>
-                <OdabirAuta></OdabirAuta>    
-            <p>Odaberite broj sjedišta:</p>
-                <OdabirAuta></OdabirAuta>
-            <Na>
-                <li class="Li"><a href="#home" class="tab"><Checkedbox></Checkedbox></a></li>
-                <li class="Li"><a href="#about" class="tab"> Klima</a></li>
-            </Na>
-            <Na>
-                <li class="Li"><a href="#home" class="tab"><Checkedbox></Checkedbox></a></li>
-                <li class="Li"><a href="#about" class="tab"> Klima</a></li>
-            </Na>
-            <Na>
-                <li class="Li"><a href="#home" class="tab"><Checkedbox></Checkedbox></a></li>
-                <li class="Li"><a href="#about" class="tab"> Klima</a></li>
-            </Na>
-            <Na>
-                <li class="Li"><a href="#home" class="tab"><Checkedbox></Checkedbox></a></li>
-                <li class="Li"><a href="#about" class="tab"> Klima</a></li>
-            </Na>
+            <div>Unesite cijenu:</div>
+                <div className="box"><div>od:</div> <NameForm placeho="KM" parentCallback = {this.callbackPocetna} /></div>  
+                <div className="box"><div>do:</div> <NameForm placeho="KM" parentCallback = {this.callbackKrajnja} /></div>    
+            <div className="tekst">Unesite datum:</div>
+                <div>od: <DataPckr parentCallback = {this.callbackDatumPoc} /></div>
+                <div>do: <DataPckr parentCallback = {this.callbackDatumKraj}/></div>       
+            <div className="tekst">Odaberite marku auta:</div>
+                <OdabirAuta parentCallback = {this.callbackAuto} />
+            <div className="tekst">Odaberite broj vrata:</div>
+                <OdabirVrata parentCallback = {this.callbackVrata} /> 
+            <div className="tekst">Odaberite broj sjedišta:</div>
+                <OdabirVrata parentCallback = {this.callbackSjedista} />
+            <div className="box">
+              <Checkedbox parentCallback = {this.callbackKlima}/>
+              <div>Klima</div>
+            </div>
+            <div className="box">
+              <Checkedbox parentCallback = {this.callbackSenzor}/>
+              <div>Parking senzor</div>
+            </div>
+            <div className="box">
+              <Checkedbox parentCallback = {this.callbackKarton}/>
+              <div>Zeleni karton</div>
+            </div>
+            <div className="box">
+              <Checkedbox parentCallback = {this.callbackAutomatik}/>
+              <div>Automatik</div>
+            </div>
+            <br></br>
+            <div className="filtriraj">
+              <Button variant="contained" color="primary" onClick={this.handleClick}>Filtriraj</Button>
+            </div>
         </div>
       
        <div class="desno">
-            <a class = "auto" href="/details">
-                <img src="/slika1.jpg" alt=""/>
-                <li class="detalji">Detalji auta:</li>
-                <li class="cijena">Cijena auta:</li>
-            </a>
-            <a class = "auto" href="/details">
-                <img src="/slika2.jpg" alt=""/>
-                <li class="detalji">Detalji auta:</li>
-                <li class="cijena">Cijena auta:</li>
-            </a>
-            <a class = "auto" href="/details">
-                <img src="/slika3.jpg" alt=""/>
-                <li class="detalji">Detalji auta:</li>
-                <li class="cijena">Cijena auta:</li>
-            </a>
+            <Auto info={this.state}/>
+            <Auto info={this.state}/>
+            <Auto info={this.state}/>
+            <Auto info={this.state}/>
        </div>
     </Nav>
     )
+  }
 }

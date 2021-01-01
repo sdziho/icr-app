@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
+import { DataShare } from '../DataProvider';
 
 const Wrap= styled.div`
     display:grid;
@@ -10,6 +11,7 @@ const Wrap= styled.div`
     margin: 2rem auto;
     padding 1em;
     gap: 1em;
+    box-shadow: 2px 2px 5px 2px #4f5152;
     h1{
         padding-left: 1em;
     }

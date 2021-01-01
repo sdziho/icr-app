@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import {NameForm,Checkedbox} from './Home'
+import {Checkedbox} from '../Forms/Checked'
+import { NameForm, TekstForm } from '../Forms/NameForm';
+import { DataPckr } from '../Forms/DataPicker';
 
 const Wrap= styled.div`
     display:grid;
@@ -11,11 +13,13 @@ const Wrap= styled.div`
     margin: 2rem auto;
     padding 1em;
     gap: 1em;
+    box-shadow: 2px 2px 5px 2px #4f5152;
     h1{
         padding-left: 1em;
     }
     .rezervisi{
         text-align: right;
+        text-decoration: none;
     }
     &:hover{
         border-bottom: 2px solid black;
@@ -62,8 +66,13 @@ const Det= styled.div`
     }
     .detalji{
         padding-left: 3em;
-        p{
+        div{
             font-weight: bold;
+        }
+        .datum{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+
         }
     }
     .cijena{
@@ -81,20 +90,24 @@ export const Payment = () => {
         <h1>Rezervacija automobila</h1>
         <Det>
             <div className="detalji">
-                <p>Odabrani model:</p>
-                <p>Odaberite datum izdavanja:</p>
-                <p>Odaberite datum povratka:</p>
-                <p>Odabrani broj dana:</p>
-                <p>Ukupna cijena:</p>
+                <div>Odabrani model:</div>
+                <br></br>
+                <div className="datum"><div>Odaberite datum izdavanja:</div> <DataPckr/></div>
+                <br></br>
+                <div className="datum"><div>Odaberite datum povratka:</div><DataPckr/></div>
+                <br></br>
+                <div>Odabrani broj dana:</div>
+                <br></br>
+                <div>Ukupna cijena:</div>
             </div>
             <img src="/slika1.jpg" alt=""/>
         </Det>
         <h1>Unesite podatke vozača</h1>
         <div className="detalji">
-                <p>Ime i prezime: <NameForm/></p>
-                <p>Email: <NameForm/></p>
-                <p>Broj telefona: <NameForm/></p>
-                <p>Broj vozačke dozvole: <NameForm/></p>
+                <p>Ime i prezime: <TekstForm placeho="Sadzid Dziho"/></p>
+                <p>Email: <TekstForm placeho="primjer@gmail.com"/></p>
+                <p>Broj telefona: <NameForm placeho="38761555666"/></p>
+                <p>Broj vozačke dozvole: <NameForm placeho="1E788G"/></p>
                 <div className="nacinPlacanja">
                     <p>Odaberite način plaćanja:</p>
                     <div className="nacin">
@@ -107,15 +120,15 @@ export const Payment = () => {
         </div>
         <h1>Unesite podatke za napalatu</h1>
         <div className="detalji">
-                <p>Vlasnik kartice:<NameForm/></p>
-                <p>Broj kartice:<NameForm/></p>
-                <p>CVC:<NameForm/></p>
+                <p>Vlasnik kartice:<TekstForm placeho="Sadzid Dziho"/></p>
+                <p>Broj kartice:<NameForm placeho="12 znamenki"/></p>
+                <p>CVC:<NameForm placeho="3 znamenke"/></p>
                 <div className="inostranstvo"><Checkedbox/>Prihvatam uslove korištenja <a href="#">Link</a></div>
         </div>
         
-        <div className="rezervisi">
+        <a className="rezervisi" href="/checkout">
             <Button variant="contained" color="primary">Potvrdi</Button>
-        </div>
+        </a>
         </Wrap>
     )
   }
