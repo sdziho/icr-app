@@ -57,15 +57,17 @@ const Det= styled.div`
     
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-gap:1em;
     
 
     img{
-        width: 100%;
+        width: 75%;
         height: 100%;
         object-fit: cover;
     }
     .detalji{
         padding-left: 3em;
+        padding-bottom:5em;
         div{
             font-weight: bold;
         }
@@ -84,7 +86,10 @@ const Det= styled.div`
     }
 `
 
-export const Payment = () => {
+export class Payment extends React.Component {
+    callBack = (childData) => {
+    }
+    render(){
     return (
         <Wrap>
         <h1>Rezervacija automobila</h1>
@@ -92,9 +97,9 @@ export const Payment = () => {
             <div className="detalji">
                 <div>Odabrani model:</div>
                 <br></br>
-                <div className="datum"><div>Odaberite datum izdavanja:</div> <DataPckr/></div>
+                <div className="datum"><div>Odaberite datum izdavanja:</div> <DataPckr parentCallback={this.callBack}/></div>
                 <br></br>
-                <div className="datum"><div>Odaberite datum povratka:</div><DataPckr/></div>
+                <div className="datum"><div>Odaberite datum povratka:</div><DataPckr parentCallback={this.callBack}/></div>
                 <br></br>
                 <div>Odabrani broj dana:</div>
                 <br></br>
@@ -104,26 +109,26 @@ export const Payment = () => {
         </Det>
         <h1>Unesite podatke vozača</h1>
         <div className="detalji">
-                <p>Ime i prezime: <TekstForm placeho="Sadzid Dziho"/></p>
-                <p>Email: <TekstForm placeho="primjer@gmail.com"/></p>
-                <p>Broj telefona: <NameForm placeho="38761555666"/></p>
-                <p>Broj vozačke dozvole: <NameForm placeho="1E788G"/></p>
+                <p>Ime i prezime: <TekstForm placeho="Sadzid Dziho" parentCallback={this.callBack}/></p>
+                <p>Email: <TekstForm placeho="primjer@gmail.com" parentCallback={this.callBack}/></p>
+                <p>Broj telefona: <NameForm placeho="38761555666" parentCallback={this.callBack}/></p>
+                <p>Broj vozačke dozvole: <NameForm placeho="1E788G" parentCallback={this.callBack}/></p>
                 <div className="nacinPlacanja">
                     <p>Odaberite način plaćanja:</p>
                     <div className="nacin">
-                        <p><Checkedbox/>Puna cijena</p>
-                        <p><Checkedbox/>Samo avans (20%)</p>
+                        <p><Checkedbox parentCallback={this.callbackOption}/>Puna cijena</p>
+                        <p><Checkedbox parentCallback={this.callbackOption}/>Samo avans (20%)</p>
                     </div>
                 </div>
-                <div className="inostranstvo"><Checkedbox/>Planiram putovati u inostranstvo</div>
+                <div className="inostranstvo"><Checkedbox parentCallback={this.callBack}/>Planiram putovati u inostranstvo</div>
         
         </div>
         <h1>Unesite podatke za napalatu</h1>
         <div className="detalji">
-                <p>Vlasnik kartice:<TekstForm placeho="Sadzid Dziho"/></p>
-                <p>Broj kartice:<NameForm placeho="12 znamenki"/></p>
-                <p>CVC:<NameForm placeho="3 znamenke"/></p>
-                <div className="inostranstvo"><Checkedbox/>Prihvatam uslove korištenja <a href="#">Link</a></div>
+                <p>Vlasnik kartice:<TekstForm placeho="Sadzid Dziho" parentCallback={this.callBack}/></p>
+                <p>Broj kartice:<NameForm placeho="12 znamenki" parentCallback={this.callBack}/></p>
+                <p>CVC:<NameForm placeho="3 znamenke" parentCallback={this.callBack}/></p>
+                <div className="inostranstvo"><Checkedbox parentCallback={this.callBack}/>Prihvatam uslove korištenja <a href="#">Link</a></div>
         </div>
         
         <a className="rezervisi" href="/checkout">
@@ -131,4 +136,6 @@ export const Payment = () => {
         </a>
         </Wrap>
     )
+    }
   }
+

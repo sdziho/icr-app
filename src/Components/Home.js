@@ -138,10 +138,6 @@ export class Home extends Component {
               <Checkedbox parentCallback = {this.callbackAutomatik}/>
               <div>Automatik</div>
             </div>
-            <br></br>
-            <div className="filtriraj">
-              <Button variant="contained" color="primary" onClick={this.handleClick}>Filtriraj</Button>
-            </div>
         </div>
       
        <div class="desno">
