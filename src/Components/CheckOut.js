@@ -16,6 +16,10 @@ const Wrap= styled.div`
             text-decoration:none;
             color:white;
         }
+        .dugme{
+            background-image: linear-gradient(#880000, black);
+            color:white
+        }
     }
 
 `
@@ -25,7 +29,7 @@ export const CheckOut = () => {
             <h1>Uspješna rezervacija!</h1>
             <div className="filtriraj">
                 <a href="/home">
-              <Button variant="contained" color="primary" >Vrati se na početnu</Button>
+              <Button className="dugme"variant="contained" color="primary" >Vrati se na početnu</Button>
               </a>
             </div>
         </Wrap>

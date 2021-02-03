@@ -13,6 +13,13 @@ const Wrap= styled.div`
     .rezervisi{
         text-align: center;
         padding: 1em;
+        a{
+            text-decoration:none;
+            .dugme{
+                background-image: linear-gradient(#880000, black);
+                color:white
+            }
+        }
     }
 
 `
@@ -24,7 +31,9 @@ export const About = () => {
             <p>Naša vizija : Korisnik je najvažnija osoba u našem poslovanju.</p>
             <div> Korisnik nikad ne prekida naš rad – oni su svrha toga. Korisnik ne ovisi o nama – mi smo ovisni o njima.</div>
             <div className="rezervisi">
-                <Button variant="contained" color="primary">Rezerviši odmah</Button>
+                <a href="/home">
+                <Button className="dugme"variant="contained" color="primary">Rezerviši odmah</Button>
+                </a>
             </div>
         </Wrap>
 

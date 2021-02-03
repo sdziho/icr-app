@@ -5,7 +5,10 @@ const Appl= styled.div`
   form{
     label{
       input{
-        width:70%
+        padding:0.3em;
+        box-shadow: 0px 0px 3px 0px #880000;
+        border-radius:5px;
+        width:75%;
       }
     }
   }
@@ -27,15 +30,19 @@ export class NameForm extends React.Component {
     }
     
     handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.value);
-      event.preventDefault();
+      return false;
     }
     render() {
       return (
         <Appl>
         <form>
             <label>
-            <input type="number" placeholder={this.props.placeho} value={this.state.value} onChange={this.handleChange} onSubmit={this.handleSubmit}/>
+              <input type="number" 
+                placeholder={this.props.placeho} 
+                value={ this.props.clear ? this.state.value : ''} 
+                onChange={this.handleChange} 
+                onSubmit={this.handleSubmit}
+              />
             </label>
         </form>
         </Appl>
@@ -59,15 +66,19 @@ export class NameForm extends React.Component {
     }
     
     handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.value);
-      event.preventDefault();
+      return false;
     }
     render() {
       return (
         <Appl>
         <form>
             <label>
-            <input type="string" placeholder={this.props.placeho} value={this.state.value} onChange={this.handleChange} onSubmit={this.handleSubmit}/>
+            <input type="string"
+              placeholder={this.props.placeho} 
+              value={this.state.value} 
+              onChange={this.handleChange} 
+              onSubmit={this.handleSubmit}
+            />
             </label>
         </form>
         </Appl>

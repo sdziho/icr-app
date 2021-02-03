@@ -9,7 +9,6 @@ import { OdabirAuta, OdabirVrata } from '../Forms/Odabir';
 import { Checkedbox } from '../Forms/Checked';
 import { Auto } from './Auto';
 import { GetVozila } from './GetVozila';
-import DataProvider, { DataShare } from '../DataProvider';
 
 const Nav= styled.ul`
     * {
@@ -70,9 +69,13 @@ const Nav= styled.ul`
         grid-gap: 2em;
         form{
           label{
-            display:flex;
+            display:grid;
+            max-width:15rem;
+            grid-template-columns: 0.8fr 1fr;
+            grid-gap:0.1em;
             select{
-              margin-left:3px;
+              
+              padding:0.3em;
               border-radius:5px;
             }
 
@@ -85,7 +88,7 @@ const Nav= styled.ul`
 
   
 
-export class Home extends Component {
+export class AdminHome extends Component {
   state = { 
     CijenaPocetna: 0,
     CijenaKrajnja: 99999,
@@ -215,10 +218,7 @@ export class Home extends Component {
                 </select>
               </label>
             </form>
-            <DataShare.Consumer>
-              {(context)=>(<p>{context}</p>)
-              }
-            </DataShare.Consumer>
+
             <GetVozila info={this.state} />
        </div>
     </Nav>

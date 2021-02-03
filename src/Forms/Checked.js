@@ -1,4 +1,9 @@
 import React from 'react'
+import styled from 'styled-components';
+
+const Appl= styled.div`
+    
+`
 
 export class Checkedbox extends React.Component{
     constructor(props){
@@ -11,10 +16,15 @@ export class Checkedbox extends React.Component{
     }
     render(){
         return (
-               <div>
-                   <input type="checkbox"  id="mybox" onChange={this.handleCheck}
-                          defaultChecked={this.state.checked}/>
-               </div>
+               <Appl>
+                   <form>
+                       <label>
+                            <input type="checkbox"  onChange={this.handleCheck}
+                                    defaultChecked={this.state.checked}></input>
+                            <span className="opcija"></span>
+                        </label>
+                   </form>
+               </Appl>
         )
     };
 }
