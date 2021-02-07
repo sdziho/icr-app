@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import ClearIcon from '@material-ui/icons/Clear';
+import EditIcon from '@material-ui/icons/Edit';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 
 
 const Appl = styled.div`
@@ -9,7 +11,7 @@ const Appl = styled.div`
       
     box-shadow: 1px 1px 5px 1px #5d5d5d;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr 0.2fr;
     border-radius: 5px;
     text-decoration: none;
     grid-template-rows: 200px;
@@ -54,7 +56,18 @@ const Appl = styled.div`
           margin:0;
         }
       }
-  }
+    
+    }
+    .opcije{
+      padding-top:2em;
+      display: inline-block;
+      text-align:center;
+      text-decoration:none;
+      border-left 1px solid black;
+      div{
+        padding-top:1em;
+      }
+    }
 `;
 
 class Filteri{
@@ -119,8 +132,8 @@ export const Auto=({carFilter, carData, datum})=> {
      
     }
     
-    console.log(datum[carData.idvozila-1].datum_poc)
-    console.log((carFilter.DatumPocetni.toString()).substring(8,10))
+    //console.log(datum[carData.idvozila-1].datum_poc)
+    //console.log((carFilter.DatumPocetni.toString()).substring(8,10))
     return (
      <Appl>
        
@@ -140,8 +153,15 @@ export const Auto=({carFilter, carData, datum})=> {
             </li>
             <li class="cijena"><b>Cijena auta: </b>
               <div><b>{carData.cijena} KM</b><p>po danu</p></div>
-              
             </li>
+            {carFilter.admin?
+            <li class="opcije">
+            <div><ClearIcon/></div>
+            <div><EditIcon/></div>
+            <div><LocalOfferIcon/></div>
+            </li>:null
+            }
+            
         </Link>
     </Appl>
     )

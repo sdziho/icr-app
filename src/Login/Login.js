@@ -1,8 +1,8 @@
 import { Button } from '@material-ui/core';
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {connect} from 'react-redux'
+import { DataShare } from '../DataProvider';
 
 const Wrap = styled.div`
 
@@ -72,6 +72,8 @@ form{
 }
 
 `
+
+
 export class Login extends React.Component{
     constructor(props) {
         super(props);
@@ -79,6 +81,7 @@ export class Login extends React.Component{
             ime: '',
             sifra:'',
             flag:true
+            
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
@@ -92,15 +95,24 @@ export class Login extends React.Component{
         event.preventDefault();
         this.setState({sifra:event.target.value})
     }
-    handleClick(){
-        console.log(this.state.ime)
-        if(this.state.ime=='admin'&&this.state.ime=='admin') console.log("bravo")
+    static contextType = DataShare;
+    handleClick=(event)=>{
+        if(this.state.ime=='admin'&&this.state.ime=='admin'){
+            event.setLogin(true);
+            console.log(event.login)
+        }
+        else if(this.state.ime=='manager'&&this.state.ime=='manager'){
+        }
+        else if(this.state.ime=='serviser'&&this.state.ime=='serviser'){
+        }
         else this.setState({flag:false})
     }
-
     render(){
         return(
             <Wrap>
+                <div>
+                    
+                </div>
                 <form>
                     <label>
                         
@@ -119,7 +131,12 @@ export class Login extends React.Component{
                         </span>
                         {this.state.flag ? <span className="none">Pogresni</span>:<span className="fail">Pogrešni podaci</span>}
                         <div className="prijava">
-                            <Button className="dugme" variant="contained" onClick={this.handleClick}><Link className="l"to="#">Prijavi se</Link></Button>
+                            <Button className="dugme" variant="contained" onClick={()=>this.handleClick(this.context)}>
+                                <Link className="l"to="#">
+                                    Prijavi se
+                                </Link>
+                            </Button>
+                            
                         </div>
                     </label>
                 </form>

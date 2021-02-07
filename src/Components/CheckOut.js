@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import { NameForm } from '../Forms/NameForm';
+import { DataShare } from '../DataProvider';
 
 const Wrap= styled.div`
     box-sizing: border-box;
@@ -23,6 +24,7 @@ const Wrap= styled.div`
     }
 
 `
+
 export const CheckOut = () => {
     return (
         <Wrap>

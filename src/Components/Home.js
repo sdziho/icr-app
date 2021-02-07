@@ -10,6 +10,8 @@ import { Checkedbox } from '../Forms/Checked';
 import { Auto } from './Auto';
 import { GetVozila } from './GetVozila';
 import DataProvider, { DataShare } from '../DataProvider';
+import {connect} from 'react-redux';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const Nav= styled.ul`
     * {
@@ -68,6 +70,9 @@ const Nav= styled.ul`
         background: #dedede;
         display: grid;
         grid-gap: 2em;
+        .add{
+          display:flex;
+        }
         form{
           label{
             display:flex;
@@ -102,6 +107,7 @@ export class Home extends Component {
     freeze:false,
     clear:true,
     ime:true,
+    admin:true,
   }
   callbackPocetna = (childData) => {
     if(!this.state.freeze)
@@ -205,7 +211,7 @@ export class Home extends Component {
         </div>
       
        <div class="desno">
-            
+        
             <form>
               <label>
                 <div>Sortiraj po:</div>
@@ -215,10 +221,9 @@ export class Home extends Component {
                 </select>
               </label>
             </form>
-            <DataShare.Consumer>
-              {(context)=>(<p>{context}</p>)
-              }
-            </DataShare.Consumer>
+            {this.state.admin?
+              <div className="add"><div>Dodaj novo auto </div><a href="#"><AddCircleOutlineIcon /></a></div>:null
+            }
             <GetVozila info={this.state} />
        </div>
     </Nav>
